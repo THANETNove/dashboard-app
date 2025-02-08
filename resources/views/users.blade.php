@@ -31,6 +31,8 @@
                                             <td>{{ $user->email }}</td>
 
                                             <td>
+                                                <a href="{{ url('user-edit', $user->id) }}"
+                                                    class="icon-action edit"><i class="far fa-edit"></i></a>
                                                 <a href="javascript:void(0);" class="icon-action delete"
                                                     data-email="{{ $user->email }}" data-user-id="{{ $user->id }}">
                                                     <i class="fas fa-trash"></i>
