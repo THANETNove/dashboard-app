@@ -29,7 +29,7 @@
                 @if (session('message'))
                     <p class="message-text-color"> {{ session('message') }}</p>
                 @endif
-                
+
             </nav>
 
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -42,7 +42,7 @@
                         </div>
                         <span class="profile-username">
 
-                            <span class="fw-bold">{{ Auth::user()->name }}</span>
+                            <span class="fw-bold" style="color: white">{{ Auth::user()->name }}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
