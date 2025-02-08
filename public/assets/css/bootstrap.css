@@ -13894,7 +13894,7 @@ fieldset:disabled .btn {
 }
 
 .main-header {
-    background: #5373c7 !important;
+    background: #1a2133 !important;
     min-height: 60px;
     width: calc(100% - 250px);
     position: fixed;
@@ -13902,7 +13902,7 @@ fieldset:disabled .btn {
 }
 
 .main-header-welcome {
-    background: #5373c7 !important;
+    background: #1a2133 !important;
     min-height: 60px;
     width: 100% !important;
     position: fixed;
@@ -13910,7 +13910,7 @@ fieldset:disabled .btn {
 }
 
 .main-header-welcome-2 {
-    background: #5373c7 !important;
+    background: #1a2133 !important;
     min-height: 60px;
     width: 100% !important;
     position: fixed;
