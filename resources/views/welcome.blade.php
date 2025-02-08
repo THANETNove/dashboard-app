@@ -49,8 +49,8 @@
                             <input type="text" id="searchInput" class="form-control" placeholder="🔍 ค้นหากระทู้...">
                         </div>
 
-                        {{-- <!-- รายการกระทู้ -->
-                        <div class="container">
+                        <!-- รายการกระทู้ -->
+                        {{--   <div class="container">
                             <div class="row">
                                 <div class="col-lg-8 col-md-12">
                                     <h3 class="mb-4">📜 สมุดข้อความ</h3>
@@ -89,19 +89,21 @@
                                                     <!-- แสดงการตอบกลับ -->
                                                     <div class="replies">
                                                         <h6>🗨️ ความคิดเห็น</h6>
-                                                        {{--  @foreach ($message->replies as $reply) --}}
-                                                        <div class="card mt-2 p-2">
-                                                            <p><strong> AAA {{-- {{ $reply->user->name }} --}}</strong>:
-                                                                asda {{--  {{ $reply->content }} --}}</p>
-                                                            <small class="text-muted">
-                                                                10.000{{-- {{ $reply->created_at->diffForHumans() }} --}}</small>
-                                                        </div>
-                                                        {{--  @endforeach --}}
+                                                        @foreach ($message->replies as $reply)
+                                                            <div class="card mt-2 p-2">
+                                                                <p><strong>{{ $reply->user->name }}</strong>:
+                                                                    {{ $reply->content }}</p>
+                                                                <small
+                                                                    class="text-muted">{{ $reply->created_at->diffForHumans() }}</small>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
 
                                                     <!-- ฟอร์มตอบกลับ -->
                                                     @auth
-                                                        <form {{--   action="{{ route('forum-reply', ['message_id' => $message->id]) }} --}}" method="POST" class="mt-3">
+                                                        <form
+                                                            action="{{ route('forum-reply', ['message_id' => $message->id]) }}"
+                                                            method="POST" class="mt-3">
                                                             @csrf
                                                             <div class="mb-2">
                                                                 <textarea name="content" class="form-control" rows="2" placeholder="เขียนความคิดเห็น..." required></textarea>
