@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Message;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $messages = Message::latest()->get();
+
+    return view('welcome', compact('messages'));
 });
 
 Auth::routes();
@@ -24,3 +28,4 @@ Route::get('/users', [App\Http\Controllers\HomeController::class, 'users'])->nam
 Route::get('/delete-user/{id}', [App\Http\Controllers\HomeController::class, 'destroy'])->name('delete-user');
 Route::get('/user-edit/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('user-edit');
 Route::put('/register-update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('register-update');
+Route::post('/forum-store', [App\Http\Controllers\HomeController::class, 'store'])->name('forum-store');

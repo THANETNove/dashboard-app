@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Message;
 use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
@@ -48,6 +49,22 @@ class HomeController extends Controller
 
 
         return view('edit_user', compact('user'));
+    }
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        Message::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect('/')->with('message', 'โพสต์ข้อความสำเร็จ');
     }
     public function update(Request $request, string $id)
     {

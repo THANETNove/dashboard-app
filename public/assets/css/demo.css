@@ -520,3 +520,7 @@ body[data-background-color="dark"] .demo-icon .icon-class {
   pointer-events: none;
   background-color: #ffffff;
 }
+
+.box-login-content-2 {
+  padding-top: 120px;
+}

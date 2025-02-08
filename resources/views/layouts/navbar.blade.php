@@ -29,6 +29,7 @@
                 @if (session('message'))
                     <p class="message-text-color"> {{ session('message') }}</p>
                 @endif
+                
             </nav>
 
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
