@@ -498,6 +498,18 @@ body[data-background-color="dark"] .demo-icon .icon-class {
   /* สีเขียว */
 }
 
+.icon-action.delete-message i {
+  margin-left: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  /* สีแดง */
+}
+
+.icon-action.delete-message:hover i {
+  color: #ff0019;
+  /* สีแดง */
+}
+
 .icon-action.delete i {
   margin-left: 12px;
   margin-top: 6px;

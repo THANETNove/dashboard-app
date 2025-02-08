@@ -29,3 +29,4 @@ Route::get('/delete-user/{id}', [App\Http\Controllers\HomeController::class, 'de
 Route::get('/user-edit/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('user-edit');
 Route::put('/register-update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('register-update');
 Route::post('/forum-store', [App\Http\Controllers\HomeController::class, 'store'])->name('forum-store');
+Route::get('/delete-message/{id}', [App\Http\Controllers\HomeController::class, 'destroyMessage'])->name('delete-message');

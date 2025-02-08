@@ -31,7 +31,10 @@ class HomeController extends Controller
     {
 
         if (Auth::user()->status == 1) {
-            return view('home');
+
+            $messages = Message::latest()->get();
+
+            return view('home', compact('messages'));
         } else {
             return redirect('/');
         }
@@ -92,8 +95,15 @@ class HomeController extends Controller
 
     public function destroy(string $id)
     {
-
+    
         $flight =  User::find($id);
+        $flight->delete();
+        return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
+    }
+    public function destroyMessage(string $id)
+    {
+
+        $flight =  Message::find($id);
         $flight->delete();
         return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
     }

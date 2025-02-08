@@ -133,3 +133,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".icon-action.delete-message").forEach(function (btn) {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault(); // ป้องกันไม่ให้ลิงก์ทำงานทันที
+
+      let userEmail = this.getAttribute("data-email");
+      let userId = this.getAttribute("data-user-id");
+
+
+
+      Swal.fire({
+        title: "คุณแน่ใจหรือไม่?",
+        text: `คุณต้องการลบกระทู้ ${userEmail} ใช่หรือไม่?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "ใช่, ลบเลย!",
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = `/delete-message/${userId}`;
+        }
+      });
+    });
+  });
+});
