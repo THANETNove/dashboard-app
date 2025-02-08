@@ -14,7 +14,9 @@ class Message extends Model
     // เชื่อมกับตาราง users (Many to One)
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'name' => 'ผู้ใช้ที่ถูกลบ' // Default name when user is null
+        ]);
     }
 
     public function replies()

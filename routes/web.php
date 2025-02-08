@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Message;
 use App\Models\Announce;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +17,14 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
+    if (Auth::check()  && Auth::user()->status == 1) {
+        return redirect('home');
+    } else {
+        $messages = Message::latest()->get();
+        $announce = Announce::oldest()->get();
 
-    $messages = Message::latest()->get();
-    $announce = Announce::oldest()->get();
-
-    return view('welcome', compact('messages', 'announce'));
+        return view('welcome', compact('messages', 'announce'));
+    }
 });
 
 Auth::routes();
