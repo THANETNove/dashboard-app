@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelButtonText: "ยกเลิก"
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/delete-user/${userId}`;
+          window.location.href = `delete-user/${userId}`;
         }
       });
     });
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelButtonText: "ยกเลิก"
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/delete-message/${userId}`;
+          window.location.href = `delete-message/${userId}`;
         }
       });
     });
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cancelButtonText: "ยกเลิก"
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = `/delete-declare/${userId}`;
+          window.location.href = `delete-declare/${userId}`;
         }
       });
     });

@@ -169,7 +169,6 @@ class HomeController extends Controller
     public function deleteDeclare(string $id)
     {
 
-
         $flight =  Announce::find($id);
         $flight->delete();
         return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
