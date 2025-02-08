@@ -3,120 +3,111 @@
 
 <head>
     @include('layouts.head')
-
-
-
 </head>
 
 <body class="antialiased">
-    <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen  bg-center bg-gray-100 dark:bg-dots-lighter selection:bg-red-500 selection:text-white">
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-gray-100 dark:bg-dots-lighter">
         @if (Route::has('login'))
             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                 @auth
                     @include('layouts.navbar')
                 @else
-                    <div class="main-header-welcome-2">
-                        <a href="{{ route('login') }}" class="font-semibold-login">Log
-                            in</a>
-
+                    <div class="main-header-welcome-2 d-flex justify-content-end">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Log in</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="font-semibold-register">Register</a>
+                            <a href="{{ route('register') }}" class="btn btn-outline-success">Register</a>
                         @endif
                     </div>
-
-
                 @endauth
             </div>
         @endif
+
         <div class="box-login-content-2">
             <div class="container">
                 <div class="row">
-                    <!-- ประกาศข่าวสาร -->
-                    <div class="col-lg-8 col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title text-danger">📌 ประกาศสำคัญ</h5>
-                                @foreach ($announce as $ann)
-                                    <p>{{ $ann->declare }}</p>
-                                @endforeach
-
-                            </div>
+                    <!-- 📌 ประกาศข่าวสาร -->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="alert alert-danger shadow-sm">
+                            <h5 class="fw-bold">📢 ประกาศสำคัญ</h5>
+                            @foreach ($announce as $ann)
+                                <p class="mb-1"><i class="fas fa-bullhorn"></i> {{ $ann->declare }}</p>
+                            @endforeach
                         </div>
 
-                        <!-- ค้นหากระทู้ -->
-                        <div class="mb-3">
+                        <!-- 🔍 ค้นหากระทู้ -->
+                        <div class="input-group mb-4">
                             <input type="text" id="searchInput" class="form-control" placeholder="🔍 ค้นหากระทู้...">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
 
-                        <!-- รายการกระทู้ -->
+
+
+                        <!-- 📜 รายการกระทู้ -->
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-8 col-md-12">
-                                    <h3 class="mb-4">📜 สมุดข้อความ</h3>
-                                    <!-- รายการข้อความ -->
+                                    <h3 class="mb-4 text-primary"><i class="fas fa-comments"></i> สมุดข้อความ</h3>
                                     <div id="messageList">
                                         @foreach ($messages as $message)
-                                            <div class="card mb-3">
+                                            <div class="card mb-3 shadow-sm border-left border-primary">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"> {{ $message->title }}</h5>
-
-                                                    <p>
-                                                        {{ $message->content }}</p>
-                                                    <p class="text-muted">โดย {{ $message->user->name }} •
-                                                        {{ $message->created_at->diffForHumans() }}</p>
+                                                    <h5 class="card-title text-primary"> <i
+                                                            class="fas fa-comment-alt"></i> {{ $message->title }}</h5>
+                                                    <p class="text-muted"><small>โดย {{ $message->user->name }} •
+                                                            {{ $message->created_at->diffForHumans() }}</small></p>
+                                                    <p class="mb-2">{{ $message->content }}</p>
                                                 </div>
                                             </div>
                                         @endforeach
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12">
+                                    <div class="card shadow-lg">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-success"><i class="fas fa-plus-circle"></i>
+                                                ตั้งกระทู้ใหม่
+                                            </h5>
+                                            <form action="{{ route('forum-store') }}" method="POST">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <input type="text" name="title"
+                                                        class="form-control border-success"
+                                                        placeholder="💬 หัวข้อกระทู้" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <textarea name="content" class="form-control border-success" rows="4" placeholder="📝 รายละเอียด" required></textarea>
+                                                </div>
+                                                @auth
+                                                    <button type="submit" class="btn btn-success w-100"><i
+                                                            class="fas fa-paper-plane"></i> โพสต์กระทู้</button>
+                                                @else
+                                                    <a href="{{ url('login') }}" class="btn btn-outline-danger w-100"><i
+                                                            class="fas fa-sign-in-alt"></i> กรุณาเข้าสู่ระบบ</a>
+                                                @endauth
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ส่วนเพิ่มกระทู้ -->
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">📝 ตั้งกระทู้ใหม่</h5>
-                                <form action="{{ route('forum-store') }}" method="POST">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <input type="text" name="title" class="form-control"
-                                            placeholder="หัวข้อกระทู้" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea name="content" class="form-control" rows="4" placeholder="รายละเอียด" required></textarea>
-                                    </div>
-                                    @auth
-                                        <button type="submit" class="btn btn-success w-100">โพสต์กระทู้</button>
-                                    @else
-                                        <a href="{{ url('login') }}" class="btn btn-success w-100">Login</a>
+                    <!-- 📝 ตั้งกระทู้ใหม่ -->
 
-
-                                    @endauth
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Script ค้นหากระทู้ -->
+        <!-- 🔍 ค้นหากระทู้ -->
         <script>
             document.getElementById("searchInput").addEventListener("input", function() {
                 let searchText = this.value.toLowerCase().trim();
-
                 document.querySelectorAll("#messageList .card").forEach(function(card) {
                     let title = card.querySelector(".card-title").textContent.toLowerCase();
                     card.style.display = title.includes(searchText) ? "" : "none";
                 });
             });
         </script>
-
-
 
     </div>
 

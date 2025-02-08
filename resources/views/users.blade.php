@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">รายชื่อทั้งหมด</div>
+                        <div class="card-title"> 🔵 รายชื่อทั้งหมด</div>
                         <!-- ช่องค้นหาข้อมูล -->
                         <div class="mb-3 mt-3">
                             <input type="text" id="searchInput" placeholder="Search ..." class="form-control" />
@@ -31,8 +31,8 @@
                                             <td>{{ $user->email }}</td>
 
                                             <td>
-                                                <a href="{{ url('user-edit', $user->id) }}"
-                                                    class="icon-action edit"><i class="far fa-edit"></i></a>
+                                                <a href="{{ url('user-edit', $user->id) }}" class="icon-action edit"><i
+                                                        class="far fa-edit"></i></a>
                                                 <a href="javascript:void(0);" class="icon-action delete"
                                                     data-email="{{ $user->email }}" data-user-id="{{ $user->id }}">
                                                     <i class="fas fa-trash"></i>

@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">กระทู้ทั้งหมด</div>
+                        <div class="card-title"> 📜 กระทู้ทั้งหมด</div>
                         <div class="mb-3 mt-3">
                             <input type="text" id="searchInput" placeholder="Search ..." class="form-control" />
 
