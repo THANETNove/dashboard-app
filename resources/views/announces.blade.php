@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="card-title">ประกาศ</div>
+                            <div class="card-title"> 🛑 ประกาศ</div>
 
                             <a href="{{ url('create-announces') }}" class="btn btn-primary ms-auto">เพิ่มรายชื่อ</a>
                         </div>
