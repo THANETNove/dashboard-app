@@ -43,6 +43,12 @@
                    <p>สมาชิก</p>
                </a>
            </li>
+           <li class="nav-item  {{ $activeRoute === 'announces' ? 'announces' : '' }}">
+               <a href="{{ url('announces') }}">
+                   <i class="fa-solid fa-bullhorn"></i>
+                   <p>ประกาศ</p>
+               </a>
+           </li>
        </ul>
 
    </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Message;
+use App\Models\Announce;
 use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,9 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
 
     $messages = Message::latest()->get();
+    $announce = Announce::oldest()->get();
 
-    return view('welcome', compact('messages'));
+    return view('welcome', compact('messages', 'announce'));
 });
 
 Auth::routes();
@@ -30,3 +32,7 @@ Route::get('/user-edit/{id}', [App\Http\Controllers\HomeController::class, 'edit
 Route::put('/register-update/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('register-update');
 Route::post('/forum-store', [App\Http\Controllers\HomeController::class, 'store'])->name('forum-store');
 Route::get('/delete-message/{id}', [App\Http\Controllers\HomeController::class, 'destroyMessage'])->name('delete-message');
+Route::get('/announces', [App\Http\Controllers\HomeController::class, 'announces'])->name('announces');
+Route::get('/create-announces', [App\Http\Controllers\HomeController::class, 'createAnnounces'])->name('create-announces');
+Route::post('/announces-store', [App\Http\Controllers\HomeController::class, 'announcesStore'])->name('announces-store');
+Route::get('/delete-declare/{id}', [App\Http\Controllers\HomeController::class, 'deleteDeclare'])->name('delete-declare');

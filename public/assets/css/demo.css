@@ -510,6 +510,18 @@ body[data-background-color="dark"] .demo-icon .icon-class {
   /* สีแดง */
 }
 
+.icon-action.delete-declare i {
+  margin-left: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  /* สีแดง */
+}
+
+.icon-action.delete-declare:hover i {
+  color: #ff0019;
+  /* สีแดง */
+}
+
 .icon-action.delete i {
   margin-left: 12px;
   margin-top: 6px;

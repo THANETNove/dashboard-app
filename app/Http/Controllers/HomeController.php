@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Announce;
 use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
@@ -27,6 +28,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    /**  
+     * !  ส่วนของการ loing หรือ สมัครสมัครชิก 
+     */
+    // 
     public function index()
     {
 
@@ -39,6 +45,11 @@ class HomeController extends Controller
             return redirect('/');
         }
     }
+
+    /**  
+     * !  ส่วนของสมาชิก
+     */
+    // เเสดง users ทั้งหมด
     public function users()
     {
         $data = DB::table('users')->get();
@@ -46,6 +57,8 @@ class HomeController extends Controller
         return view('users', compact('data'));
     }
 
+
+    // ไปหน้าเเก้ไข
     public function edit(string $id)
     {
         $user =  User::find($id);
@@ -53,22 +66,8 @@ class HomeController extends Controller
 
         return view('edit_user', compact('user'));
     }
-    public function store(Request $request)
-    {
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
-
-        Message::create([
-            'user_id' => Auth::id(),
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
-
-        return redirect('/')->with('message', 'โพสต์ข้อความสำเร็จ');
-    }
+    // เเก้ไข  update user
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id); // ถ้าไม่พบ User ให้แจ้ง Error 404
@@ -91,19 +90,87 @@ class HomeController extends Controller
 
         return redirect('users')->with('message', "แก้ไขข้อมูลเรียบร้อยแล้ว");
     }
-
-
+    // ลบ user
     public function destroy(string $id)
     {
-    
+
         $flight =  User::find($id);
         $flight->delete();
         return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
     }
+
+
+    /**  
+     * ! ส่วนของ ตั้งกระทู้ใหม่
+     */
+    // เพิ่ม  กระทู้
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        Message::create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect('/')->with('message', 'โพสต์ข้อความสำเร็จ');
+    }
+
+    // ลบ กระทู้
     public function destroyMessage(string $id)
     {
 
         $flight =  Message::find($id);
+        $flight->delete();
+        return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
+    }
+
+
+    /**  
+     * ! ส่วนของประกาศ
+     */
+    //  เเสดง ประกาศ ทั้งหมด
+    public function announces()
+    {
+        $data = Announce::latest()->get();
+
+        return view('announces', compact('data'));
+    }
+
+    // ไปหน้า form ประกาศ
+    public function createAnnounces()
+    {
+        return view('create_announces');
+    }
+
+
+    // เพิ่ม ประกาศ
+
+    public function announcesStore(Request $request)
+    {
+
+
+        $request->validate([
+            'declare' => 'required|string',
+        ]);
+
+        Announce::create([
+            'declare' => $request->declare,
+        ]);
+
+        return redirect('announces')->with('message', 'โพสต์ข้อความสำเร็จ');
+    }
+    // ลบ ประกาศ
+    public function deleteDeclare(string $id)
+    {
+
+
+        $flight =  Announce::find($id);
         $flight->delete();
         return redirect()->back()->with('message', 'ลบข้อมูลเรียบร้อยแล้ว');
     }
