@@ -52,7 +52,9 @@ class HomeController extends Controller
     // เเสดง users ทั้งหมด
     public function users()
     {
-        $data = DB::table('users')->get();
+        $data = DB::table('users')
+            ->where("status", '!=', 1)
+            ->get();
 
         return view('users', compact('data'));
     }

@@ -49,7 +49,7 @@
                             <input type="text" id="searchInput" class="form-control" placeholder="🔍 ค้นหากระทู้...">
                         </div>
 
-                        <!-- รายการกระทู้ -->
+                        {{-- <!-- รายการกระทู้ -->
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-8 col-md-12">
@@ -71,7 +71,56 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> --}}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-12">
+                                    <h3 class="mb-4">📜 สมุดข้อความ</h3>
+                                    <!-- รายการข้อความ -->
+                                    <div id="messageList">
+                                        @foreach ($messages as $message)
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $message->title }}</h5>
+                                                    <p>{{ $message->content }}</p>
+                                                    <p class="text-muted">โดย {{ $message->user->name }} •
+                                                        {{ $message->created_at->diffForHumans() }}</p>
+
+                                                    <!-- แสดงการตอบกลับ -->
+                                                    <div class="replies">
+                                                        <h6>🗨️ ความคิดเห็น</h6>
+                                                        {{--  @foreach ($message->replies as $reply) --}}
+                                                        <div class="card mt-2 p-2">
+                                                            <p><strong> AAA {{-- {{ $reply->user->name }} --}}</strong>:
+                                                                asda {{--  {{ $reply->content }} --}}</p>
+                                                            <small class="text-muted">
+                                                                10.000{{-- {{ $reply->created_at->diffForHumans() }} --}}</small>
+                                                        </div>
+                                                        {{--  @endforeach --}}
+                                                    </div>
+
+                                                    <!-- ฟอร์มตอบกลับ -->
+                                                    @auth
+                                                        <form {{--   action="{{ route('forum-reply', ['message_id' => $message->id]) }} --}}" method="POST" class="mt-3">
+                                                            @csrf
+                                                            <div class="mb-2">
+                                                                <textarea name="content" class="form-control" rows="2" placeholder="เขียนความคิดเห็น..." required></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary btn-sm">💬
+                                                                ตอบกลับ</button>
+                                                        </form>
+                                                    @else
+                                                        <p><a href="{{ url('login') }}">เข้าสู่ระบบ</a>
+                                                            เพื่อแสดงความคิดเห็น</p>
+                                                    @endauth
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                     <!-- ส่วนเพิ่มกระทู้ -->
