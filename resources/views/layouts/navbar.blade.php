@@ -42,7 +42,7 @@
                         </div>
                         <span class="profile-username">
 
-                            <span class="fw-bold">{{ Auth::user()->name }}</span>
+                            <span class="fw-bold" style="color: white">{{ Auth::user()->name }}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
