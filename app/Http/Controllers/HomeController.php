@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\Announce;
+use App\Models\Replie;
 use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
@@ -121,6 +122,23 @@ class HomeController extends Controller
         ]);
 
         return redirect('/')->with('message', 'โพสต์ข้อความสำเร็จ');
+    }
+    // ตอบกระทู้
+    public function storeReply(Request $request, $message_id)
+    {
+        $request->validate([
+            'content' => 'required|string|max:500',
+        ]);
+
+        $message = Message::findOrFail($message_id);
+
+        $reply = new Replie();
+        $reply->content = $request->content;
+        $reply->user_id = Auth::id();
+        $reply->message_id = $message->id;
+        $reply->save();
+
+        return redirect()->back()->with('success', 'ตอบกลับสำเร็จ!');
     }
 
     // ลบ กระทู้

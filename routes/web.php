@@ -36,3 +36,4 @@ Route::get('/announces', [App\Http\Controllers\HomeController::class, 'announces
 Route::get('/create-announces', [App\Http\Controllers\HomeController::class, 'createAnnounces'])->name('create-announces');
 Route::post('/announces-store', [App\Http\Controllers\HomeController::class, 'announcesStore'])->name('announces-store');
 Route::get('/delete-declare/{id}', [App\Http\Controllers\HomeController::class, 'deleteDeclare'])->name('delete-declare');
+Route::post('/forum/reply/{message_id}', [App\Http\Controllers\HomeController::class, 'storeReply'])->name('forum-reply');
